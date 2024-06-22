@@ -160,11 +160,6 @@
             </a>
         </div>
 
-        <form action="./Servlet_Visualizza_Tabella" method="post">
-            Name: <input type="hidden" name="query" value="1">
-            <input type="submit" value="Submit">
-        </form>
-
     </div>
 </div>
 </body>

@@ -1,7 +1,7 @@
 <%@ page import="model.Song" %>
 <%@ page import="java.util.List" %>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8"%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -75,8 +75,8 @@
         <h2>Music Data Table</h2>
     </div>
     <div class="button-container">
-        <a href="results/insertData.jsp"><button class="primary" title="Add New Data"></button></a>
-        <button class="danger" title="Delete Selected"></button>
+        <a href="results/insertData.jsp"><button class="primary" title="Add New Data">Add New Data</button></a>
+        <button class="danger" title="Delete Selected">Delete Selected</button>
     </div>
     <div class="table-concept">
         <!-- Table display -->
@@ -99,14 +99,19 @@
             </tr>
             </thead>
             <tbody id="table-body">
-            <% if (request.getAttribute("songList") != null) {
-                List<Song> songs = (List<Song>) request.getAttribute("songList");
-                for (Song song : songs) { %>
+            <%
+                if (request.getAttribute("songList") != null) {
+                    List<Song> songList = (List<Song>) request.getAttribute("songList");
+                    for (Song song : songList) {
+                        String id = song.getId().toString().replaceAll("'", "\\\\'");
+                        String trackName = song.getTrackName().replaceAll("'", "\\\\'").replaceAll(",", "\\\\,");
+                        String artistName = song.getArtistName().replaceAll("'", "\\\\'").replaceAll(",", "\\\\,");
+            %>
             <tr>
                 <td><input type="checkbox"></td>
-                <td><%= song.getId() %></td>
-                <td><%= song.getTrackName() %></td>
-                <td><%= song.getArtistName() %></td>
+                <td><%= id %></td>
+                <td><%= trackName %></td>
+                <td><%= artistName %></td>
                 <td><%= song.getStreams() %></td>
                 <td><%= song.getAcousticness() %></td>
                 <td><%= song.getDanceability() %></td>
@@ -116,60 +121,44 @@
                 <td><%= song.getSpeechiness() %></td>
                 <td><%= song.getValence() %></td>
                 <td>
-                    <a href="results/update.jsp?id=<%= song.getId() %>"><button class="edit" title="Edit">Edit</button></a>
+                    <a href="results/update.jsp?id=<%= id %>"><button class="edit" title="Edit">Edit</button></a>
                 </td>
             </tr>
-            <%     }
-            } %>
+            <%
+                    }
+                }
+            %>
             </tbody>
         </table>
         <div class="pagination">
-            <button id="prev-page" class="freccSX" onclick="prevPage()"> < </button>
-            <span id="page-info">Pagina 1 di 5</span>
-            <button id="next-page" class="freccDX" onclick="nextPage()"> > </button>
+            <button id="prev-page" class="freccSX" > < </button>
+            <span id="page-info">Pagina <span id="curp"></span> di <span id="totp"></span></span>
+            <button id="next-page" class="freccDX" > > </button>
         </div>
     </div>
 </div>
 
 <script>
-    <%
-    if (request.getAttribute("songList") != null) {
-                List<Song> songs = (List<Song>) request.getAttribute("songList");
-    %> // Inizializza songs con la lista di canzoni ottenuta dalla servlet
-    const nsongs = <%=songs.size()%>;
+    const itemsPerPage = 10; // Numero di elementi per pagina
     let currentPage = 1;
-    const itemsPerPage = 20;
 
     function displayTablePage(page) {
-        const tableBody = document.getElementById('table-body');
-        tableBody.innerHTML = '';
+        const tableRows = document.querySelectorAll('#table-body tr');
+        const startIdx = (page - 1) * itemsPerPage;
+        const endIdx = startIdx + itemsPerPage;
 
-        const startIndex = (page - 1) * itemsPerPage;
-        const endIndex = startIndex + itemsPerPage;
-        const pageData = songs.slice(startIndex, endIndex);
-        <%for (Song song : songs) { %>
-            const row = document.createElement('tr');
-            row.innerHTML = `
-                <td><input type="checkbox"></td>
-                <td><%= song.getId() %></td>
-                <td><%= song.getTrackName() %></td>
-                <td><%= song.getArtistName() %></td>
-                <td><%= song.getStreams() %></td>
-                <td><%= song.getAcousticness() %></td>
-                <td><%= song.getDanceability() %></td>
-                <td><%= song.getEnergy() %></td>
-                <td><%= song.getInstrumentalness() %></td>
-                <td><%= song.getLiveness() %></td>
-                <td><%= song.getSpeechiness() %></td>
-                <td><%= song.getValence() %></td>
-                <td>
-                    <a href="results/update.jsp?id=<%= song.getId() %>"><button class="edit" title="Edit">Edit</button></a>
-                </td>
-            `;
-            tableBody.appendChild(row);
-        <%}%>
-        const totalPages = Math.ceil(nsongs / itemsPerPage);
-        document.getElementById('page-info').innerText = `Pagina ${page} di ${totalPages}`;
+        tableRows.forEach((row, index) => {
+            if (index >= startIdx && index < endIdx) {
+                row.style.display = '';
+            } else {
+                row.style.display = 'none';
+            }
+        });
+
+        const totalPages = Math.ceil(tableRows.length / itemsPerPage);
+        document.getElementById('curp').innerText = page;
+        document.getElementById('totp').innerText = totalPages
+        //document.getElementById('page-info').innerText = 'Pagina ${page} di ${totalPages}';
     }
 
     function prevPage() {
@@ -180,15 +169,21 @@
     }
 
     function nextPage() {
-        const totalPages = Math.ceil(songs.length / itemsPerPage);
+        const tableRows = document.querySelectorAll('#table-body tr');
+        const totalPages = Math.ceil(tableRows.length / itemsPerPage);
         if (currentPage < totalPages) {
             currentPage++;
             displayTablePage(currentPage);
         }
     }
 
-    // Visualizza la prima pagina al caricamento
+    // Mostra la prima pagina al caricamento
     displayTablePage(currentPage);
+
+    // Aggiungi gestori di eventi ai pulsanti di navigazione
+    document.getElementById('prev-page').addEventListener('click', prevPage);
+    document.getElementById('next-page').addEventListener('click', nextPage);
 </script>
+
 </body>
 </html>
