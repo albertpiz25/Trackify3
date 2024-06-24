@@ -18,7 +18,7 @@ public class Servlet_Visualizza_Tabella extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String tquerystr = req.getParameter("query");
         int tquery = Integer.parseInt(tquerystr);
-
+        String red = "table.jsp";
         List<Song> songs = null;
 
          switch (tquery){
@@ -46,12 +46,16 @@ public class Servlet_Visualizza_Tabella extends HttpServlet {
              case 8:
                  songs = songService.getSongsSortedBySpeechiness();
                  break;
+             case 9:
+                 songs = songService.getAllSongs();
+                 red = "ceraca.jsp";
+                 break;
          }
 
          HttpSession session = req.getSession(true);
          session.setAttribute("query", tquery);
          req.setAttribute("songList", songs);
-         req.getRequestDispatcher("table.jsp").forward(req, resp);
+         req.getRequestDispatcher(red).forward(req, resp);
     }
 
     @Override

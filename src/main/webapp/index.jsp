@@ -145,7 +145,7 @@
 
         <!-- Ricerca personale -->
         <div class="ag-courses_item">
-            <a href="./Servlet_Visualizza_Tabella?query=9" class="ag-courses-item_link">
+            <a href="Servlet_Visualizza_Tabella?query=9" class="ag-courses-item_link">
                 <div class="ag-courses-item_bg"></div>
 
                 <div class="ag-courses-item_title">
