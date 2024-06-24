@@ -17,6 +17,35 @@ public class Song {
 
     // Getters e Setters
 
+
+    public Song(ObjectId id, double acousticness, String artistName, double danceability, double energy, double instrumentalness, double liveness, double speechiness, long streams, String trackName, double valence) {
+        this.id = id;
+        this.acousticness = acousticness;
+        this.artistName = artistName;
+        this.danceability = danceability;
+        this.energy = energy;
+        this.instrumentalness = instrumentalness;
+        this.liveness = liveness;
+        this.speechiness = speechiness;
+        this.streams = streams;
+        this.trackName = trackName;
+        this.valence = valence;
+    }
+
+    public Song() {
+        this.id = null;
+        this.acousticness = 0;
+        this.artistName = null;
+        this.danceability = 0;
+        this.energy = 0;
+        this.instrumentalness = 0;
+        this.liveness = 0;
+        this.speechiness = 0;
+        this.streams = 0;
+        this.trackName = null;
+        this.valence = 0;
+    }
+
     public ObjectId getId() {
         return id;
     }
