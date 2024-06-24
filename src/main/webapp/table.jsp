@@ -103,25 +103,22 @@
                     if (request.getAttribute("songList") != null) {
                         List<Song> songList = (List<Song>) request.getAttribute("songList");
                         for (Song song : songList) {
-                            String id = song.getId().toString().replaceAll("'", "\\\\'");
-                            String trackName = song.getTrackName().replaceAll("'", "\\\\'").replaceAll(",", "\\\\,");
-                            String artistName = song.getArtistName().replaceAll("'", "\\\\'").replaceAll(",", "\\\\,");
                 %>
                 <tr>
-                    <td><input type="checkbox" name="selectedIds" value="<%=id%>"></td>
-                    <td><%= id %></td>
-                    <td><%= trackName %></td>
-                    <td><%= artistName %></td>
+                    <td><input type="checkbox" name="selectedIds" value="<%=song.getId()%>"></td>
+                    <td><%= song.getId() %></td>
+                    <td><%= song.getTrackName() %></td>
+                    <td><%= song.getArtistName() %></td>
                     <td><%= song.getStreams() %></td>
-                    <td><%= song.getAcousticness() %></td>
-                    <td><%= song.getDanceability() %></td>
-                    <td><%= song.getEnergy() %></td>
-                    <td><%= song.getInstrumentalness() %></td>
-                    <td><%= song.getLiveness() %></td>
-                    <td><%= song.getSpeechiness() %></td>
-                    <td><%= song.getValence() %></td>
+                    <td><%= String.format("%.3f",song.getAcousticness()) %></td>
+                    <td><%= String.format("%.3f",song.getDanceability()) %></td>
+                    <td><%= String.format("%.3f",song.getEnergy()) %></td>
+                    <td><%= String.format("%.3f",song.getInstrumentalness()) %></td>
+                    <td><%= String.format("%.3f",song.getLiveness()) %></td>
+                    <td><%= String.format("%.3f",song.getSpeechiness()) %></td>
+                    <td><%= String.format("%.3f",song.getValence()) %></td>
                     <td>
-                        <a href="update.jsp?id=<%= id %>"><button class="edit" title="Edit">Edit</button></a>
+                        <a href="update.jsp?song=<%= song %>"><button class="edit" title="Edit">Edit</button></a>
                     </td>
                 </tr>
                 <%
