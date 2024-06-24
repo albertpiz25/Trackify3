@@ -74,7 +74,7 @@
         <h2>Music Data Table</h2>
     </div>
     <div class="button-container">
-        <a href="results/insertData.jsp"><button class="primary" title="Add New Data">Add New Data</button></a>
+        <a href="insertData.jsp"><button class="primary" title="Add New Data">Add New Data</button></a>
         <button class="danger" title="Delete Selected" onclick="submitDelate()" >Delete Selected</button>
     </div>
     <div class="table-concept">
@@ -118,7 +118,7 @@
                     <td><%= String.format("%.3f",song.getSpeechiness()) %></td>
                     <td><%= String.format("%.3f",song.getValence()) %></td>
                     <td>
-                        <a href="update.jsp?song=<%= song %>"><button class="edit" title="Edit">Edit</button></a>
+                        <a href="update.jsp?songId=<%= song.getId() %>">Edit</a>
                     </td>
                 </tr>
                 <%
