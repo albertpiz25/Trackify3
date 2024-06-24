@@ -76,60 +76,62 @@
     </div>
     <div class="button-container">
         <a href="results/insertData.jsp"><button class="primary" title="Add New Data">Add New Data</button></a>
-        <button class="danger" title="Delete Selected">Delete Selected</button>
+        <button class="danger" title="Delete Selected" onclick="submitDelate()" >Delete Selected</button>
     </div>
     <div class="table-concept">
-        <!-- Table display -->
-        <table id="music-table">
-            <thead>
-            <tr>
-                <th>Select</th>
-                <th>Id</th>
-                <th>Track_Name</th>
-                <th>Artist_Name</th>
-                <th>Streams</th>
-                <th>Acousticness</th>
-                <th>Danceability</th>
-                <th>Energy</th>
-                <th>Instrumentalness</th>
-                <th>Liveness</th>
-                <th>Speechiness</th>
-                <th>Valence</th>
-                <th>Actions</th>
-            </tr>
-            </thead>
-            <tbody id="table-body">
-            <%
-                if (request.getAttribute("songList") != null) {
-                    List<Song> songList = (List<Song>) request.getAttribute("songList");
-                    for (Song song : songList) {
-                        String id = song.getId().toString().replaceAll("'", "\\\\'");
-                        String trackName = song.getTrackName().replaceAll("'", "\\\\'").replaceAll(",", "\\\\,");
-                        String artistName = song.getArtistName().replaceAll("'", "\\\\'").replaceAll(",", "\\\\,");
-            %>
-            <tr>
-                <td><input type="checkbox"></td>
-                <td><%= id %></td>
-                <td><%= trackName %></td>
-                <td><%= artistName %></td>
-                <td><%= song.getStreams() %></td>
-                <td><%= song.getAcousticness() %></td>
-                <td><%= song.getDanceability() %></td>
-                <td><%= song.getEnergy() %></td>
-                <td><%= song.getInstrumentalness() %></td>
-                <td><%= song.getLiveness() %></td>
-                <td><%= song.getSpeechiness() %></td>
-                <td><%= song.getValence() %></td>
-                <td>
-                    <a href="results/update.jsp?id=<%= id %>"><button class="edit" title="Edit">Edit</button></a>
-                </td>
-            </tr>
-            <%
+        <form id="deleteForm" action="Servlet_Delate" method="post">
+            <!-- Table display -->
+            <table id="music-table">
+                <thead>
+                <tr>
+                    <th>Select</th>
+                    <th>Id</th>
+                    <th>Track_Name</th>
+                    <th>Artist_Name</th>
+                    <th>Streams</th>
+                    <th>Acousticness</th>
+                    <th>Danceability</th>
+                    <th>Energy</th>
+                    <th>Instrumentalness</th>
+                    <th>Liveness</th>
+                    <th>Speechiness</th>
+                    <th>Valence</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody id="table-body">
+                <%
+                    if (request.getAttribute("songList") != null) {
+                        List<Song> songList = (List<Song>) request.getAttribute("songList");
+                        for (Song song : songList) {
+                            String id = song.getId().toString().replaceAll("'", "\\\\'");
+                            String trackName = song.getTrackName().replaceAll("'", "\\\\'").replaceAll(",", "\\\\,");
+                            String artistName = song.getArtistName().replaceAll("'", "\\\\'").replaceAll(",", "\\\\,");
+                %>
+                <tr>
+                    <td><input type="checkbox" name="selectedIds" value="<%=id%>"></td>
+                    <td><%= id %></td>
+                    <td><%= trackName %></td>
+                    <td><%= artistName %></td>
+                    <td><%= song.getStreams() %></td>
+                    <td><%= song.getAcousticness() %></td>
+                    <td><%= song.getDanceability() %></td>
+                    <td><%= song.getEnergy() %></td>
+                    <td><%= song.getInstrumentalness() %></td>
+                    <td><%= song.getLiveness() %></td>
+                    <td><%= song.getSpeechiness() %></td>
+                    <td><%= song.getValence() %></td>
+                    <td>
+                        <a href="update.jsp?id=<%= id %>"><button class="edit" title="Edit">Edit</button></a>
+                    </td>
+                </tr>
+                <%
+                        }
                     }
-                }
-            %>
-            </tbody>
-        </table>
+                %>
+                </tbody>
+            </table>
+        </form>
         <div class="pagination">
             <button id="prev-page" class="freccSX" > < </button>
             <span id="page-info">Pagina <span id="curp"></span> di <span id="totp"></span></span>
@@ -175,6 +177,10 @@
             currentPage++;
             displayTablePage(currentPage);
         }
+    }
+
+    function submitDelate(){
+        document.getElementById('deleteForm').submit();
     }
 
     // Mostra la prima pagina al caricamento

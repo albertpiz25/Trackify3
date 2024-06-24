@@ -48,9 +48,10 @@ public class Servlet_Visualizza_Tabella extends HttpServlet {
                  break;
          }
 
-
-        req.setAttribute("songList", songs);
-        req.getRequestDispatcher("table.jsp").forward(req, resp);
+         HttpSession session = req.getSession(true);
+         session.setAttribute("query", tquery);
+         req.setAttribute("songList", songs);
+         req.getRequestDispatcher("table.jsp").forward(req, resp);
     }
 
     @Override
