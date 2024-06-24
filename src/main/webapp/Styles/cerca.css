@@ -8,14 +8,23 @@ body {
     background-size: cover;
 }
 
-.searchBox {
+.searchProp
+{
     position: absolute;
-    top: 10px; /* Posiziona la barra di ricerca a 10px dall'alto */
-    right: 10px; /* Posiziona la barra di ricerca a 10px dalla destra */
-    background: #2f3640;
-    height: 40px;
+    top: 3rem; /* Posiziona la barra di ricerca a 10px dall'alto */
+    right: 4rem; /* Posiziona la barra di ricerca a 10px dalla destra */
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
+}
+
+.searchBox {
+    background: rgba(157, 157, 158, 0.63);
+    height: 2.5rem;
+    width: 15rem;
     border-radius: 40px;
-    padding: 10px;
+    border: 1px solid rgba(238, 238, 238, 0.53);
+    position: relative;
 }
 
 .searchButton {
@@ -23,11 +32,20 @@ body {
     float: right;
     width: 40px;
     height: 40px;
+    background: transparent;
+    border: none;
     border-radius: 50%;
-    background: #2f3640;
     display: flex;
     justify-content: center;
     align-items: center;
+    position: absolute;
+    top: 0;
+    right: .5rem;
+}
+.searchButton > img
+{
+    filter: hue-rotate(100deg);
+    width: 20px;
 }
 
 .searchInput {
@@ -35,11 +53,15 @@ body {
     background: none;
     outline: none;
     float: left;
-    padding: 0 6px;
+    padding: 0 0 1rem 1rem;
     color: white;
     font-size: 16px;
     line-height: 40px;
     width: 240px; /* Imposta una larghezza fissa per la barra di ricerca */
+}
+.searchInput::placeholder
+{
+    color: rgba(0, 0, 0, 0.6);
 }
 
 @media screen and (max-width: 620px) {
@@ -153,3 +175,44 @@ button.edit:hover, button.delete:hover {
     width: 25px;
     height: 25px;
 }
+
+select {
+    /* Reset */
+    appearance: none;
+    background-image: url("../image/freccia.png") !important;
+    background-color: rgba(255, 255, 255, 0.41);
+    background-repeat: no-repeat !important;
+    background-size: 1.2rem !important;
+    background-position: right 1rem top .6rem!important;
+    box-sizing: border-box;
+    border: 1px solid rgba(255, 255, 255, 0.49);
+    outline: 0;
+    font: inherit;
+    font-size: 1rem;
+
+    /* Personalize */
+    height: 2.5rem;
+    width: 15rem;
+    padding: 0 1rem;
+    color: rgba(0, 0, 0, 0.6);
+    border-radius: 5rem;
+    box-shadow: 0 0 1em 0 rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+}
+
+/*select::-ms-expand {
+    display: none;
+}*/
+
+/* Remove focus outline */
+select:focus {
+    outline: 0;
+    background-color: rgba(255, 255, 255, 0.41);
+}
+
+/* <option> colors */
+select option {
+    color: inherit;
+    background: linear-gradient(to left, white 3em, rgba(255, 255, 255, 0.41) 3em);
+}
+

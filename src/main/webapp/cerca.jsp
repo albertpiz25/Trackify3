@@ -1,21 +1,97 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import="model.Song" %>
+<%@ page import="java.util.List" %>
 <html>
 <head>
     <title>Cerca</title>
     <link rel="stylesheet" href="Styles/cerca.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .card {
+            padding: 20px;
+            margin: 20px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .table-title {
+            margin-bottom: 20px;
+        }
+        .button-container {
+            margin-bottom: 20px;
+        }
+        .button-container span {
+            margin-right: 10px;
+        }
+        .button-container button {
+            margin-right: 10px;
+        }
+        table {
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        table, th, td {
+            border: 1px solid #ccc;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+        .pagination {
+            margin-top: 20px;
+        }
+        .pagination label {
+            margin-right: 5px;
+            cursor: pointer;
+        }
+        .pagination .disabled {
+            cursor: not-allowed;
+            color: grey;
+        }
+        .pagination .active {
+            font-weight: bold;
+        }
+        input[type="radio"].table-radio {
+            display: none;
+        }
+        input[type="radio"].table-radio:not(:checked) ~ .table-display,
+        input[type="radio"].table-radio:not(:checked) ~ table,
+        input[type="radio"].table-radio:not(:checked) ~ .pagination {
+            display: none;
+        }
+    </style>
 </head>
 <body>
 
 <div class="card">
 
-    <div class="searchBox">
+    <div class="searchProp">
 
-        <input class="searchInput"type="text" name="" placeholder="Search">
-        <button class="searchButton" href="#">
-            <i class="material-icons">
-                search
-            </i>
-        </button>
+        <select>
+            <option selected value="0">ID</option>
+            <option value="1">Track_Name</option>
+            <option value="2">Artist_Name</option>
+            <option value="3">Streams</option>
+            <option value="3">Acousticness</option>
+            <option value="3">Danceability</option>
+            <option value="3">Energy</option>
+            <option value="3">Instrumentalness</option>
+            <option value="3">Liveness</option>
+            <option value="3">Speechiness</option>
+            <option value="3">Valence</option>
+            <option value="3">Actions</option>
+        </select>
+
+
+        <div class="searchBox">
+
+            <input class="searchInput"type="text" name="" placeholder="Search">
+            <button class="searchButton" href="#">
+                <img src="image/cerca3.png">
+            </button>
+        </div>
     </div>
 
     <div class="table-title">

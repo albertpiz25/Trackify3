@@ -48,7 +48,7 @@ public class Servlet_Visualizza_Tabella extends HttpServlet {
                  break;
              case 9:
                  songs = songService.getAllSongs();
-                 red = "ceraca.jsp";
+                 red = "cerca.jsp";
                  break;
          }
 
