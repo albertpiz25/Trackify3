@@ -82,8 +82,7 @@
                 <option value="speechiness">Speechiness</option>
                 <option value="valence">Valence</option>
             </select>
-
-
+            
             <div class="searchBox">
 
                 <input class="searchInput" type="text" name="value" placeholder="Search">
