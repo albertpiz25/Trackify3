@@ -1,0 +1,176 @@
+@font-face {
+    font-family: 'Gotham-Book';
+    src: url('../fonts/GothamBook.ttf') format('ttf');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Gotham-Light';
+    src: url('../fonts/GothamLight.ttf') format('ttf');
+    font-weight: normal;
+    font-style: normal;
+}
+
+body {
+    margin: 0;
+    font-family: 'Gotham-Light', sans-serif;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('../image/d20be1654213d8b75b3d48edcfa97066.png');
+}
+
+
+/* Imposta lo stile del menu */
+nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 250px; /* Imposta la larghezza desiderata */
+    height: 100%;
+    background-color: #bcf8ef; /* Colore di sfondo del menu */
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+}
+
+nav[data-state="open"] {
+    transform: translateX(0);
+}
+
+/* Stile per il pulsante dell'hamburger */
+.hamburger-menu {
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    z-index: 1000;
+}
+
+.burger {
+    cursor: pointer;
+    background: none;
+    border: none;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+
+.burger span {
+    width: 25px;
+    height: 3px;
+    background-color: #f8f6f6; /* Colore delle linee dell'hamburger di default */
+    transition: background-color 0.3s ease; /* Aggiungi una transizione per il cambio di colore */
+}
+
+.burger[data-state="open"] span {
+    background-color: #000; /* Cambia il colore delle linee quando il menu è aperto */
+}
+
+
+
+nav ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+nav ul li {
+    margin: 20px 0; /* Spazio tra le voci di menu */
+    text-align: center; /* Allinea il testo al centro */
+    width: 100%; /* Larghezza massima delle voci di menu */
+}
+
+nav ul li a {
+    color: #040404;
+    text-decoration: none;
+    display: block;
+    padding: 10px;
+    font-size: 18px;
+}
+
+nav ul li a:hover {
+    background-color: #0df5eb;
+}
+
+
+nav ul li a:hover {
+    background-color: #0df5eb; /* Colore di sfondo al passaggio del mouse */
+}
+
+/* Stile per il contenuto principale */
+main {
+    margin-left: 260px; /* Spazio lasciato per il menu */
+    padding: 20px;
+}
+
+.container {
+    max-width: 1200px;
+    margin: auto;
+}
+
+.row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.col-md-6 {
+    flex: 1;
+    padding: 20px;
+}
+
+.image-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* Allinea l'immagine all'inizio del contenitore */
+    height: 100vh; /* Imposta l'altezza del contenitore per riempire l'intera altezza della finestra */
+    text-align: center; /* Centra l'immagine orizzontalmente */
+}
+
+.image-container img {
+    max-width: 100%;
+    max-height: 100%;
+    display: block; /* Imposta l'immagine come blocco per centrarla correttamente */
+    margin: 30px auto 0; /* Centra l'immagine orizzontalmente e aggiunge un margine sopra */
+}
+
+
+
+.submit {
+    position: absolute;
+    bottom: 80px; /* Distanza dal basso */
+    left: 50%; /* Posiziona al centro orizzontalmente */
+    transform: translateX(-50%); /* Centra orizzontalmente */
+    background-color: #51e5cf;
+    border-radius: 40px;
+    border: 0;
+    color: rgba(0, 0, 0, 0.8);
+    cursor: pointer;
+    font-size: 16px; /* Riduci la dimensione del carattere */
+    height: 40px; /* Riduci l'altezza */
+    width: 150px; /* Larghezza fissa */
+    text-align: center;
+    line-height: 40px; /* Altezza del testo centrato verticalmente */
+    z-index: 1; /* Assicura che il bottone sia sopra l'immagine */
+}
+
+
+.ag-format-container {
+    padding-top: 30px;
+    width: 1142px;
+    margin: 0px auto;
+}
+
+.logoContainer {
+    display: flex;
+    justify-content: center; /* Centra l'immagine orizzontalmente */
+    width: 100%; /* Assicura che il contenitore prenda tutta la larghezza disponibile */
+}
+
+.container img {
+    max-width: 100%; /* Assicura che l'immagine non superi la larghezza del contenitore */
+    height: auto; /* Mantiene le proporzioni dell'immagine */
+}
