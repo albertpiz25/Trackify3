@@ -68,37 +68,38 @@
 <div class="card">
 
     <div class="searchProp">
+        <form action="Servlet_Visualizza_Tabella?query=9" method="post">
+            <select name="attribute">
+                <option selected value="_id">ID</option>
+                <option value="track_name">Track_Name</option>
+                <option value="artist_name">Artist_Name</option>
+                <option value="streams">Streams</option>
+                <option value="acousticness">Acousticness</option>
+                <option value="danceability">Danceability</option>
+                <option value="energy">Energy</option>
+                <option value="instrumentalness">Instrumentalness</option>
+                <option value="liveness">Liveness</option>
+                <option value="speechiness">Speechiness</option>
+                <option value="valence">Valence</option>
+            </select>
 
-        <select>
-            <option selected value="0">ID</option>
-            <option value="1">Track_Name</option>
-            <option value="2">Artist_Name</option>
-            <option value="3">Streams</option>
-            <option value="3">Acousticness</option>
-            <option value="3">Danceability</option>
-            <option value="3">Energy</option>
-            <option value="3">Instrumentalness</option>
-            <option value="3">Liveness</option>
-            <option value="3">Speechiness</option>
-            <option value="3">Valence</option>
-            <option value="3">Actions</option>
-        </select>
 
+            <div class="searchBox">
 
-        <div class="searchBox">
+                <input class="searchInput" type="text" name="value" placeholder="Search">
+                <button type="submit" class="searchButton">
+                    <img src="image/cerca3.png">
+                </button>
+            </div>
+        </form>
 
-            <input class="searchInput"type="text" name="" placeholder="Search">
-            <button class="searchButton" href="#">
-                <img src="image/cerca3.png">
-            </button>
-        </div>
     </div>
 
     <div class="table-title">
         <h2>Music Data Table</h2>
     </div>
     <div class="button-container">
-        <a href="results/insertData.jsp"><button class="primary" title="Add New Data">Add New Data</button></a>
+        <a href="insertData.jsp"><button class="primary" title="Add New Data">Add New Data</button></a>
         <button class="danger" title="Delete Selected" onclick="submitDelate()" >Delete Selected</button>
     </div>
     <div class="table-concept">

@@ -165,4 +165,172 @@ public class SongService {
     public List<Song> getSongsSortedByValence() {
         return getSongsSortedBy("valence");
     }
+
+    // Ricerca per singolo valore
+    public List<Song> searchByArtistName(String value) {
+        List<Song> songs = new ArrayList<>();
+        Document query = new Document("artist_name", new Document("$regex", value).append("$options", "i"));
+        FindIterable<Document> documents = songCollection.find(query);
+        for (Document doc : documents) {
+            songs.add(documentToSong(doc));
+        }
+        return songs;
+    }
+
+    public List<Song> searchByTrackName(String value) {
+        List<Song> songs = new ArrayList<>();
+        Document query = new Document("track_name", new Document("$regex", value).append("$options", "i"));
+        FindIterable<Document> documents = songCollection.find(query);
+        for (Document doc : documents) {
+            songs.add(documentToSong(doc));
+        }
+        return songs;
+    }
+
+    // Per streams
+    public List<Song> searchByStreams(long minValue, Long maxValue) {
+        List<Song> songs = new ArrayList<>();
+        Document query = new Document("streams", new Document("$gte", minValue));
+        if (maxValue != null) {
+            query.get("streams", Document.class).append("$lte", maxValue);
+        }
+        FindIterable<Document> documents = songCollection.find(query).sort(Sorts.ascending("streams"));
+        for (Document doc : documents) {
+            songs.add(documentToSong(doc));
+        }
+        return songs;
+    }
+
+    public List<Song> searchByStreams(long minValue) {
+        return searchByStreams(minValue, null);
+    }
+
+    // Per acousticness
+    public List<Song> searchByAcousticness(double minValue, Double maxValue) {
+        List<Song> songs = new ArrayList<>();
+        Document query = new Document("acousticness", new Document("$gte", minValue));
+        if (maxValue != null) {
+            query.get("acousticness", Document.class).append("$lte", maxValue);
+        }
+        FindIterable<Document> documents = songCollection.find(query).sort(Sorts.ascending("acousticness"));
+        for (Document doc : documents) {
+            songs.add(documentToSong(doc));
+        }
+        return songs;
+    }
+
+    public List<Song> searchByAcousticness(double minValue) {
+        return searchByAcousticness(minValue, null);
+    }
+
+    // Per danceability
+    public List<Song> searchByDanceability(double minValue, Double maxValue) {
+        List<Song> songs = new ArrayList<>();
+        Document query = new Document("danceability", new Document("$gte", minValue));
+        if (maxValue != null) {
+            query.get("danceability", Document.class).append("$lte", maxValue);
+        }
+        FindIterable<Document> documents = songCollection.find(query).sort(Sorts.ascending("danceability"));
+        for (Document doc : documents) {
+            songs.add(documentToSong(doc));
+        }
+        return songs;
+    }
+
+    public List<Song> searchByDanceability(double minValue) {
+        return searchByDanceability(minValue, null);
+    }
+
+    // Per energy
+    public List<Song> searchByEnergy(double minValue, Double maxValue) {
+        List<Song> songs = new ArrayList<>();
+        Document query = new Document("energy", new Document("$gte", minValue));
+        if (maxValue != null) {
+            query.get("energy", Document.class).append("$lte", maxValue);
+        }
+        FindIterable<Document> documents = songCollection.find(query).sort(Sorts.ascending("energy"));
+        for (Document doc : documents) {
+            songs.add(documentToSong(doc));
+        }
+        return songs;
+    }
+
+    public List<Song> searchByEnergy(double minValue) {
+        return searchByEnergy(minValue, null);
+    }
+
+    // Per instrumentalness
+    public List<Song> searchByInstrumentalness(double minValue, Double maxValue) {
+        List<Song> songs = new ArrayList<>();
+        Document query = new Document("instrumentalness", new Document("$gte", minValue));
+        if (maxValue != null) {
+            query.get("instrumentalness", Document.class).append("$lte", maxValue);
+        }
+        FindIterable<Document> documents = songCollection.find(query).sort(Sorts.ascending("instrumentalness"));
+        for (Document doc : documents) {
+            songs.add(documentToSong(doc));
+        }
+        return songs;
+    }
+
+    public List<Song> searchByInstrumentalness(double minValue) {
+        return searchByInstrumentalness(minValue, null);
+    }
+
+    // Per liveness
+    public List<Song> searchByLiveness(double minValue, Double maxValue) {
+        List<Song> songs = new ArrayList<>();
+        Document query = new Document("liveness", new Document("$gte", minValue));
+        if (maxValue != null) {
+            query.get("liveness", Document.class).append("$lte", maxValue);
+        }
+        FindIterable<Document> documents = songCollection.find(query).sort(Sorts.ascending("liveness"));
+        for (Document doc : documents) {
+            songs.add(documentToSong(doc));
+        }
+        return songs;
+    }
+
+    public List<Song> searchByLiveness(double minValue) {
+        return searchByLiveness(minValue, null);
+    }
+
+    // Per speechiness
+    public List<Song> searchBySpeechiness(double minValue, Double maxValue) {
+        List<Song> songs = new ArrayList<>();
+        Document query = new Document("speechiness", new Document("$gte", minValue));
+        if (maxValue != null) {
+            query.get("speechiness", Document.class).append("$lte", maxValue);
+        }
+        FindIterable<Document> documents = songCollection.find(query).sort(Sorts.ascending("speechiness"));
+        for (Document doc : documents) {
+            songs.add(documentToSong(doc));
+        }
+        return songs;
+    }
+
+    public List<Song> searchBySpeechiness(double minValue) {
+        return searchBySpeechiness(minValue, null);
+    }
+
+    // Per valence
+    public List<Song> searchByValence(double minValue, Double maxValue) {
+        List<Song> songs = new ArrayList<>();
+        Document query = new Document("valence", new Document("$gte", minValue));
+        if (maxValue != null) {
+            query.get("valence", Document.class).append("$lte", maxValue);
+        }
+        FindIterable<Document> documents = songCollection.find(query).sort(Sorts.ascending("valence"));
+        for (Document doc : documents) {
+            songs.add(documentToSong(doc));
+        }
+        return songs;
+    }
+
+    public List<Song> searchByValence(double minValue) {
+        return searchByValence(minValue, null);
+    }
+
+
+
 }
